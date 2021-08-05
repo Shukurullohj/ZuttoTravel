@@ -29,8 +29,35 @@ class PlaceController extends Controller
 
             $places->where('user_id', $user->id);
         }
+
+        if (request()->wantsJson()) {
+            return $places;
+        }
         $places = $places->get();
         return view('place.index', [
+            'places' => $places,
+            'userz' => User::all()
+        ]);
+    }
+    public function home(Perfecture $perfecture)
+    {
+        
+        if ($perfecture->exists){
+            $places = $perfecture->places()->latest();
+        }else {
+            $places = Place::latest();
+        }
+        if ($username = request('by')) {
+            $user = \App\User::where('name', $username)->firstorFail();
+
+            $places->where('user_id', $user->id);
+        }
+
+        if (request()->wantsJson()) {
+            return $places;
+        }
+        $places = $places->get();
+        return view('home', [
             'places' => $places,
             'userz' => User::all()
         ]);
@@ -63,6 +90,7 @@ class PlaceController extends Controller
             'name' => request('name'),
             'body' => request('body'),
             'price' => request('price'),
+            'image' => request('image'),
             'perfecture_id' =>request('perfecture_id'),
             'user_id' => auth()->id()
         ]);
@@ -77,7 +105,9 @@ class PlaceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($perfecture, Place $place)
-    {
+    {   
+
+        
         return view('place.show', [
             'place' => $place,
             'comments' => $place->comments()->paginate(2)]

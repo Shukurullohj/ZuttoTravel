@@ -19,6 +19,7 @@ class CreatePlacesTable extends Migration
             $table->unsignedBigInteger('perfecture_id')->nullable();
             $table->string('name');
             $table->string('body');
+            $table->string('path');
             $table->float('price');
             $table->timestamps();
         });

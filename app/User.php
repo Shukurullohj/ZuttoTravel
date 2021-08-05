@@ -20,7 +20,7 @@ class User extends Authenticatable
                     
     public function getAvatarPathAttribute($avatar)
     {
-        return $avatar ?: 'images/avatars/default.jpg';
+        return $avatar ?: '/images/avatars/default.jpg';
     }
     public function places()
     {

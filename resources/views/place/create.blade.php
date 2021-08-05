@@ -2,7 +2,7 @@
 
 @section('content')
  <section class="p-5 bg-gradient-to-r from-green-300 via-pink-200 to-blue-100">
-    <form action="/places" method="POST">
+    <form action="/places" method="POST" enctype="multipart/form-data">
         @csrf
     <div>
         <label for="name">Place of Name</label>
@@ -19,6 +19,9 @@
                 <option value="{{$perfecture->id}}">{{$perfecture->name}}</option>
             @endforeach
         </select>
+    </div>
+    <div>
+        <input name="path" type="file">
     </div>
     <div>
         <label for="body">About the place</label>

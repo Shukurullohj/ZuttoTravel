@@ -23,7 +23,9 @@ window.Vue = require('vue');
 Vue.component('flash', require('./components/Flash.vue').default);
 Vue.component('comment', require('./components/Comment.vue').default);
 Vue.component('avatar-form', require('./components/AvatarForm.vue').default);
-Vue.component('example-component',require('./components/ExampleComponent.vue').default); ;
+Vue.component('example-component', require('./components/ExampleComponent.vue').default); 
+Vue.component('scan', require('./components/Scan.vue').default); 
+
 
 
 

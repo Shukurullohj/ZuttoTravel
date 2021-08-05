@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Perfecture;
 use App\Comment;
 use App\RecordActivity;
+use Laravel\Scout\Searchable;
 
 class Place extends Model
 {
-    use RecordActivity;
+    use RecordActivity, Searchable;
 
     protected $guarded = [];
     public function perfecture()
@@ -31,6 +32,11 @@ class Place extends Model
     public function creator()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+    protected function makeAllSearchableUsing($query)
+    {
+        return $query->with('creator')
+        ->with('perfecture');
     }
 
 }
